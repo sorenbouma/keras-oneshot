@@ -35,9 +35,9 @@ print(X.shape)
 print(X.shape)
 Xval,yval,cval = loadimgs(valpath)
 print(Xval.shape)
-#with open("train.pickle", "wb") as f:
-#	pickle.dump((X,y,c),f)
+with open("train.pickle", "wb") as f:
+	pickle.dump((X,y,c),f)
 
 
-#with open("val.pickle", "wb") as f:
-#	pickle.dump((Xval,yval,cval),f)
+with open("val.pickle", "wb") as f:
+	pickle.dump((Xval,yval,cval),f)
