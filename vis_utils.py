@@ -22,7 +22,7 @@ for j in range(m):
     img.append(imgmatrix)
 img=np.hstack(img).astype("float64")
 
-gradient= [np.linspace(start=255,stop=0,num=img.shape[0])]*img.shape[1]
+gradient= [np.linspace(start=0,stop=120,num=img.shape[0])]*img.shape[1]
 gradient = np.asarray(gradient).T
 img += gradient
 plt.matshow(255-img,cmap='gray')
