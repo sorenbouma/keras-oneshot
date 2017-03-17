@@ -28,6 +28,7 @@ def loadimgs(path,n=0):
 #	print(cat_dict)
 	return X,y,cat_dict
 
+
 X,y,c=loadimgs(basepath)
 
 plt.show()
