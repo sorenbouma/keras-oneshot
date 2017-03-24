@@ -6,13 +6,15 @@ import os
 import matplotlib.pyplot as plt
 basepath = '/home/soren/Documents/oneshot/omniglot/python/images_background/'
 valpath = '/home/soren/Documents/oneshot/omniglot/python/images_evaluation/'
-
+lang_dict = {}
 def loadimgs(path,n=0):
 	X=[]
 	y = []
 	cat_dict = {}
 	curr_y = n
+        #I want to make dict {"lang":(start,end)} for every language
 	for alphabet in os.listdir(path):
+                lang_dict[alphabet] = [curr_y,None]
 		for letter in os.listdir(path+alphabet):
 			cat_dict[curr_y] = (alphabet, letter)
 			currpath = path + alphabet + '/'
@@ -23,14 +25,16 @@ def loadimgs(path,n=0):
 				y.append(curr_y)
 			X.append(np.stack(category_images))
 			curr_y += 1
+                lang_dict[alphabet][1] = curr_y - 1
 	X=np.stack(X)
 	y=np.vstack(y)
 #	print(cat_dict)
-	return X,y,cat_dict
+	return X,y,lang_dict
 
 
 X,y,c=loadimgs(basepath)
 
+print(lang_dict)
 plt.show()
 print(X.shape)
 print(X.shape)

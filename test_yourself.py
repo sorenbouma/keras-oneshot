@@ -8,7 +8,6 @@ with open("train.pickle","r") as f:
 
 with open("val.pickle","r") as f:
     (Xval,y,c) = pickle.load(f)
-    
 
 def concat_images(X):
     nc,h,w,_ = X.shape

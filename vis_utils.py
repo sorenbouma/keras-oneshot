@@ -1,5 +1,4 @@
 import sys
-from sklearn.utils import shuffle
 import numpy as np
 import numpy.random as rng
 from scipy.misc import imread
@@ -7,7 +6,7 @@ import dill as pickle
 import os
 import matplotlib.pyplot as plt
 with open("train.pickle", "r") as f:
-	(X,y,c) = pickle.load(f)
+    (X,y,c) = pickle.load(f)
 n_classes,n_ex,h,w=X.shape
 s=3
 k=8*s
@@ -15,13 +14,13 @@ m=19*s
 if False:
     img=[]
     for j in range(m):
-	imgmatrix = []
-	for i in range(k):
-	    c=np.random.randint(0,n_classes)
-	    e=np.random.randint(0,n_ex)
-	    imgmatrix.append(X[c,e])
-	imgmatrix=np.vstack(imgmatrix)
-	img.append(imgmatrix)
+        imgmatrix = []
+        for i in range(k):
+            c=np.random.randint(0,n_classes)
+            e=np.random.randint(0,n_ex)
+            imgmatrix.append(X[c,e])
+        imgmatrix=np.vstack(imgmatrix)
+        img.append(imgmatrix)
     img=np.hstack(img).astype("float64")
 
     gradient= [np.linspace(start=0,stop=120,num=img.shape[0])]*img.shape[1]
@@ -34,10 +33,10 @@ class Siamese_Loader:
     """For loading batches and testing tasks to a siamese net"""
     def __init__(self,Xtrain,Xval=None):
         if Xval is None:
-		self.Xval = Xtrain 
-	else:
-       		self.Xval = Xval# / Xval.max()
-        self.Xtrain = Xtrain# / Xtrain.max()
+            self.Xval = Xtrain 
+        else:
+            self.Xval = Xval# / Xval.max()
+            self.Xtrain = Xtrain# / Xtrain.max()
 
 
         self.n_classes,self.n_examples,self.w,self.h = Xtrain.shape
@@ -76,7 +75,6 @@ class Siamese_Loader:
     
     def test_oneshot(self,model,N,k,verbose=0):
         """Test average N way oneshot learning accuracy of a siamese neural net over k one-shot tasks"""
-        pass
         n_correct = 0
         if verbose:
             print("Evaluating model on {} unique {} way one-shot learning tasks ...".format(k,N))
@@ -134,6 +132,7 @@ def format_axis(ax):
     plt.yticks(np.arange(0,105*n,105))
 
 def plot_alphabet(alphabet_dir,ax=None,title=None):
+    """Plots an alphabet given the directory they're stored in. """
     current = os.listdir(alphabet_dir)
     alphabet_length = len(current)
     n = np.ceil(np.sqrt(alphabet_length)).astype("int8")
@@ -172,8 +171,9 @@ def save_alphabets(basedir):
         #filepath = os.path.join(save_path,alphabet)+".png"
         filepath = alphabet + ".png"
         plt.savefig(filepath)
-save_alphabets(base_dir)
+#save_alphabets(base_dir)
 #TODO: save all of these a pngs? concat subsets into big images? want them nicely presented
 #pairs, _ = loader.make_oneshot_task(9)
-#plot_oneshot_task(pairs)
+#plot_oneshot_task(pairs)
 
+plot_alphabet(os.path.join(base_dir,"Bengali"))
