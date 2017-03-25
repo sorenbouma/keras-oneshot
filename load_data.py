@@ -27,22 +27,21 @@ def loadimgs(path,n=0):
 			curr_y += 1
                 lang_dict[alphabet][1] = curr_y - 1
 	X=np.stack(X)
-	y=np.vstack(y)
 #	print(cat_dict)
-	return X,y,lang_dict
+	return X,lang_dict
 
 
-X,y,c=loadimgs(basepath)
+X,c=loadimgs(basepath)
 
 print(lang_dict)
 plt.show()
 print(X.shape)
 print(X.shape)
-Xval,yval,cval = loadimgs(valpath)
+Xval,cval = loadimgs(valpath)
 print(Xval.shape)
 with open("train.pickle", "wb") as f:
-	pickle.dump((X,y,c),f)
+	pickle.dump((X,c),f)
 
 
 with open("val.pickle", "wb") as f:
-	pickle.dump((Xval,yval,cval),f)
+	pickle.dump((Xval,cval),f)
