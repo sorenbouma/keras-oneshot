@@ -4,7 +4,6 @@ from scipy.misc import imread
 import dill as pickle
 import os
 import matplotlib.pyplot as plt
-<<<<<<< HEAD
 import argparse
 """Script to preprocess the omniglot dataset and pickle it into an array that's easy
     to index my character type"""
@@ -15,33 +14,7 @@ args = parser.parse_args()
 data_path = args.path
 basepath = os.path.join(data_path,'python/images_background')
 valpath = os.path.join(data_path,'python/images_evaluation')
-=======
-basepath = '/home/soren/Documents/oneshot/omniglot/python/images_background/'
-valpath = '/home/soren/Documents/oneshot/omniglot/python/images_evaluation/'
 lang_dict = {}
-def loadimgs(path,n=0):
-	X=[]
-	y = []
-	cat_dict = {}
-	curr_y = n
-        #I want to make dict {"lang":(start,end)} for every language
-	for alphabet in os.listdir(path):
-                lang_dict[alphabet] = [curr_y,None]
-		for letter in os.listdir(path+alphabet):
-			cat_dict[curr_y] = (alphabet, letter)
-			currpath = path + alphabet + '/'
-			category_images=[]
-			for example in os.listdir(currpath+letter):
-				image = imread(currpath+letter+'/'+example)
-				category_images.append(image)
-				y.append(curr_y)
-			X.append(np.stack(category_images))
-			curr_y += 1
-                lang_dict[alphabet][1] = curr_y - 1
-	X=np.stack(X)
-#	print(cat_dict)
-	return X,lang_dict
->>>>>>> 780a574c55778601d38d74cdf2bef8f899fe6511
 
 def loadimgs(path,n=0):
     X=[]
@@ -76,22 +49,13 @@ def loadimgs(path,n=0):
     X = np.stack(X)
     return X,y,lang_dict
 
-X,c=loadimgs(basepath)
+X,y,c=loadimgs(basepath)
 
-<<<<<<< HEAD
-#pickle the arrays
-Xval,yval,cval = loadimgs(valpath)
-=======
-print(lang_dict)
-plt.show()
-print(X.shape)
-print(X.shape)
-Xval,cval = loadimgs(valpath)
-print(Xval.shape)
->>>>>>> 780a574c55778601d38d74cdf2bef8f899fe6511
+
 with open("train.pickle", "wb") as f:
 	pickle.dump((X,c),f)
 
 
+X,y,c=loadimgs(basepath)
 with open("val.pickle", "wb") as f:
-	pickle.dump((Xval,cval),f)
+	pickle.dump((X,c),f)
