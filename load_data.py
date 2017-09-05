@@ -56,6 +56,6 @@ with open("train.pickle", "wb") as f:
 	pickle.dump((X,c),f)
 
 
-X,y,c=loadimgs(basepath)
+X,y,c=loadimgs(valpath)
 with open("val.pickle", "wb") as f:
 	pickle.dump((X,c),f)
