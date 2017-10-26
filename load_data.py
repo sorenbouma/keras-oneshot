@@ -10,18 +10,20 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--path",help="Path where omniglot folder resides")
+parser.add_argument("--save", help = "Path to pickle data to.", default=os.getcwd())
 args = parser.parse_args()
 data_path = os.path.join(args.path,"omniglot" ,"python")
 train_folder = os.path.join(data_path,'images_background')
 valpath = os.path.join(data_path,'images_evaluation')
+
+save_path = args.save
+
 lang_dict = {}
 
 
 
-
-
 def loadimgs(path,n=0):
-    print("!!")
+    #if data not already unzipped, unzip it.
     if not os.path.exists(path):
         print("unzipping")
         os.chdir(data_path)
@@ -61,10 +63,10 @@ def loadimgs(path,n=0):
 X,y,c=loadimgs(train_folder)
 
 
-with open("train.pickle", "wb") as f:
+with open(os.path.join(save_path,"train.pickle"), "wb") as f:
 	pickle.dump((X,c),f)
 
 
 X,y,c=loadimgs(valpath)
-with open("val.pickle", "wb") as f:
+with open(os.path.join(save_path,"val.pickle"), "wb") as f:
 	pickle.dump((X,c),f)
