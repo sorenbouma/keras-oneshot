@@ -9,14 +9,23 @@ import argparse
     to index my character type"""
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--path",help="Path where you've downloaded the omniglot images")
+parser.add_argument("--path",help="Path where omniglot folder resides")
 args = parser.parse_args()
-data_path = args.path
-basepath = os.path.join(data_path,'python/images_background')
-valpath = os.path.join(data_path,'python/images_evaluation')
+data_path = os.path.join(args.path,"omniglot" ,"python")
+train_folder = os.path.join(data_path,'images_background')
+valpath = os.path.join(data_path,'images_evaluation')
 lang_dict = {}
 
+
+
+
+
 def loadimgs(path,n=0):
+    print("!!")
+    if not os.path.exists(path):
+        print("unzipping")
+        os.chdir(data_path)
+        os.system("unzip {}".format(path+".zip" ))
     X=[]
     y = []
     cat_dict = {}
@@ -49,7 +58,7 @@ def loadimgs(path,n=0):
     X = np.stack(X)
     return X,y,lang_dict
 
-X,y,c=loadimgs(basepath)
+X,y,c=loadimgs(train_folder)
 
 
 with open("train.pickle", "wb") as f:
