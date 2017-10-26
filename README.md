@@ -20,7 +20,7 @@ sudo pip install -r requirements.txt
 Then you'll need to download the omniglot dataset and preprocess/pickle it with the load_data.py script.
 ```bash
 git clone https://github.com/brendenlake/omniglot
-python load_data.py --path <PATH TO THIS FOLDER>/omniglot
+python load_data.py --path <PATH TO THIS FOLDER>
 ```
 Then you can run the jupyter notebook:
 ```bash
