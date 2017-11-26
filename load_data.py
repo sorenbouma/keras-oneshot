@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 from scipy.misc import imread
-import dill as pickle
+import pickle
 import os
 import matplotlib.pyplot as plt
 import argparse
