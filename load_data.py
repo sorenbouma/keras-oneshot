@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--path",help="Path where omniglot folder resides")
 parser.add_argument("--save", help = "Path to pickle data to.", default=os.getcwd())
 args = parser.parse_args()
-data_path = os.path.join(args.path,"omniglot" ,"python")
+data_path = os.path.join(args.path, "python")
 train_folder = os.path.join(data_path,'images_background')
 valpath = os.path.join(data_path,'images_evaluation')
 
